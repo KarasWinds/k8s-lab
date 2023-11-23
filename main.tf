@@ -23,6 +23,7 @@ resource "kind_cluster" "default" {
       service_subnet = "10.11.0.0/16"
 
       disable_default_cni = true
+      kube_proxy_mode     = "none"
     }
   }
 }
@@ -41,4 +42,13 @@ resource "helm_release" "cilium" {
   values = [
     "${file("cilium.yaml")}"
   ]
+
+  set {
+    name  = "k8sServiceHost"
+    value = "kind-control-plane"
+  }
+  set {
+    name  = "k8sServicePort"
+    value = "6443"
+  }
 }

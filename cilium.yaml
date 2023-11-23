@@ -2,3 +2,4 @@ image:
   pullPolicy: IfNotPresent
 ipam:
   mode: kubernetes
+kubeProxyReplacement: true
