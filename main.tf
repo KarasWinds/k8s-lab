@@ -21,6 +21,24 @@ resource "kind_cluster" "default" {
     networking {
       pod_subnet     = "10.10.0.0/16"
       service_subnet = "10.11.0.0/16"
+
+      disable_default_cni = true
     }
   }
+}
+
+resource "helm_release" "cilium" {
+  depends_on = [
+    kind_cluster.default
+  ]
+  name       = "cilium"
+  repository = "https://helm.cilium.io"
+  chart      = "cilium"
+  version    = "1.14.4"
+
+  namespace = "kube-system"
+
+  values = [
+    "${file("cilium.yaml")}"
+  ]
 }
