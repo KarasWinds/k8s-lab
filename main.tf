@@ -1,6 +1,7 @@
 resource "kind_cluster" "default" {
-  name           = "kind"
-  wait_for_ready = true
+  name            = "kind"
+  wait_for_ready  = true
+  kubeconfig_path = "${path.module}/kind-config"
   kind_config {
     kind        = "Cluster"
     api_version = "kind.x-k8s.io/v1alpha4"
