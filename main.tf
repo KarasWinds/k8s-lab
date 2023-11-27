@@ -43,13 +43,4 @@ resource "helm_release" "cilium" {
   values = [
     "${file("cilium.yaml")}"
   ]
-
-  set {
-    name  = "k8sServiceHost"
-    value = "kind-control-plane"
-  }
-  set {
-    name  = "k8sServicePort"
-    value = "6443"
-  }
 }
