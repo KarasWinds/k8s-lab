@@ -7,6 +7,10 @@ terraform {
     helm = {
       version = "~> 2.10.0"
     }
+    docker = {
+      source  = "kreuzwerker/docker"
+      version = "~> 3.0.2"
+    }
   }
 }
 
@@ -17,4 +21,8 @@ provider "helm" {
   kubernetes {
     config_path = "${path.module}/kind-config"
   }
+}
+
+provider "docker" {
+  host = "unix:///var/run/docker.sock"
 }
